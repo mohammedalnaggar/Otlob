@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Groups</h2>
+<p>
+    <strong>Owner:</strong>
+    <%= current_user.try(:email)%>
+</p>
+<% current_user.try(:groups).each do |group| %>
+  <p>
+    <strong>Name:</strong>
+    <%= group.name %>
+  </p>
+ 
+<% end %>
+
+<br>
+
+<%= link_to 'Back', root_path %>
+<%= link_to 'New Group', new_group_path %>
