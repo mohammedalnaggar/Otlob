@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :groups
   devise_for :users
   resources :users do
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :friendships
   
-  # get '/', { to: 'welcome#index'}
+  
+  get '/order/:id' => 'orders#finish', :as => :finish_order
   root 'welcome#index'
 end

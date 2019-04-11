@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Restaurant</th>
+      <th>Status</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.restaurant %></td>
+        <td><%= order.status %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <% if order.status != "finished" %>
+           <td><%= link_to 'Finish',finish_order_path(order.id), data: { confirm: 'Are you sure you want to terminate order?' } %></td>
+           <%  end %>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Order', new_order_path %>
+<%= link_to 'Back', root_path %>
