@@ -1,0 +1,13 @@
+<% for user in @users %>
+  <div class="user">
+    <p>
+      <strong><%=h user.email %></strong>
+      <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+      <div class="clear"></div>
+    </p>
+  </div>
+<% end %>
+
+
+
+<%= link_to 'Back', friendship_path(current_user.try(:id)) %>

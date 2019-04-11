@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-
+  resources :friendships
   
   # get '/', { to: 'welcome#index'}
   root 'welcome#index'

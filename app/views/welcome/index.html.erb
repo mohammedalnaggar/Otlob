@@ -17,3 +17,6 @@
 <%= link_to 'Articles', controller: 'articles'  %>
 <%= link_to 'Groups',user_groups_path(current_user) %>
 
+
+
+<%= link_to "Friends", friendship_path(current_user.try(:id)) %>
