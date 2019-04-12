@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :orders
+  
+  resources :orders do
+    resources :order_users
+  end
   resources :groups
   devise_for :users
   resources :users do

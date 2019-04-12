@@ -1,0 +1,12 @@
+<% for user in @users %>
+  <div class="user">
+    <p>
+      <strong><%=h user.email %></strong>
+      <%= link_to "Add", order_order_users_path(params[:order_id],:user_id => user), :method => :post %>
+      <div class="clear"></div>
+    </p>
+  </div>
+<% end %>
+
+<%= link_to 'Add', friendships_path(current_user) %> |
+<%= link_to 'Cancel', order_order_users_path %>

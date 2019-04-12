@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    
   end
 
   def new
@@ -49,6 +50,7 @@ class OrdersController < ApplicationController
     @order.update(status: 1)
     redirect_to orders_path
   end
+
   def destroy
     @order.destroy
     respond_to do |format|
