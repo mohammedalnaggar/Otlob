@@ -53,7 +53,7 @@
         <td><%= order.order.status %></td>
         <td><%= order.status %></td>
         <% if order.status != "joined" %>
-        <td><%= link_to 'Join',join_order_path(order.order.id) %></td>
+        <td><%= link_to 'Join',join_order_path(current_user.try(:id),order.order.id) %></td>
         <%  end %>
       </tr>
     <% end %>

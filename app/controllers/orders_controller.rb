@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  #before_action :delete_records ,only: [:index]
 
   def index
     @orders = Order.where('user_id = (?)',current_user.try(:id))
@@ -47,13 +48,13 @@ class OrdersController < ApplicationController
   end
 
   def finish
-    @order = OrderUser.where('order_id = (?) and user_id = (?) ',params[:id],current_user.try(:id))
+    @order = Order.find(params[:id])
     @order.update(status: 1)
     redirect_to orders_path
   end
 
   def join
-    @order = Order.find(params[:id])
+    @order = OrderUser.where('order_id = (?) and user_id = (?) ',params[:id],params[:user])
     @order.update(status: 1)
     redirect_to orders_path
   end
@@ -70,6 +71,10 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def delete_records
+      @order=OrderUser.select("id").where('order_id NOT IN (?)',Order.select("id").all).destroy_all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
