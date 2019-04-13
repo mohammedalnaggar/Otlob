@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.where('user_id = (?)',current_user.try(:id))
+    @involvedOrders = OrderUser.where('user_id = (?)',current_user.try(:id))
   end
 
   def show
@@ -46,6 +47,12 @@ class OrdersController < ApplicationController
   end
 
   def finish
+    @order = OrderUser.where('order_id = (?) and user_id = (?) ',params[:id],current_user.try(:id))
+    @order.update(status: 1)
+    redirect_to orders_path
+  end
+
+  def join
     @order = Order.find(params[:id])
     @order.update(status: 1)
     redirect_to orders_path

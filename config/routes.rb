@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   
   
   get '/order/:id' => 'orders#finish', :as => :finish_order
+  get '/order/:id' => 'orders#join', :as => :join_order
   root 'welcome#index'
 end

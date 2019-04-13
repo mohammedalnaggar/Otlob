@@ -31,5 +31,36 @@
 
 <br>
 
+<h1>Orders You are part of it </h1>
+
+<table>
+  <thead>
+    <tr>
+    <th>Order Owner</th>
+      <th>Restaurant</th>
+      <th>Order Status</th>
+      <th>Status</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @involvedOrders.each do |order| %>
+      <tr>
+      <td><%= order.order.user.email %></td>
+        <td><%= order.order.restaurant %></td>
+        <td><%= order.order.status %></td>
+        <td><%= order.status %></td>
+        <% if order.status != "joined" %>
+        <td><%= link_to 'Join',join_order_path(order.order.id) %></td>
+        <%  end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
 <%= link_to 'New Order', new_order_path %>
 <%= link_to 'Back', root_path %>

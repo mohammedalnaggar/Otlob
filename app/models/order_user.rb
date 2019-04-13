@@ -1,5 +1,5 @@
 class OrderUser < ApplicationRecord
-  enum status: [ :waiting, :finished]
+  enum status: [ :invited, :joined]
   belongs_to :order
   belongs_to :user
 end
