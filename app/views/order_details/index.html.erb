@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Order Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Orderuser</th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Comment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.order_user.user.email %></td>
+        <td><%= order_detail.item %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= order_detail.price %></td>
+        <td><%= order_detail.comment %></td>
+        <td><%= link_to 'Show', order_order_user_order_detail_path(params[:order_id],params[:order_user_id],order_detail.id) %></td>
+        <td><%= link_to 'Edit', edit_order_order_user_order_detail_path(params[:order_id],params[:order_user_id],order_detail.id) %></td>
+        <td><%= link_to 'Destroy', order_order_user_order_detail_path(params[:order_id],params[:order_user_id],order_detail.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Order Detail', new_order_order_user_order_detail_path %> | 
+<%= link_to 'Back', root_path %>

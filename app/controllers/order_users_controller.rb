@@ -46,6 +46,12 @@ class OrderUsersController < ApplicationController
     end
   end
 
+  def join
+    @order = OrderUser.where('order_id = (?) and user_id = (?) ',params[:id],params[:user])
+    @order.update(status: 1)
+    redirect_to orders_path
+  end
+
   def destroy
     @order_user.destroy
     respond_to do |format|
