@@ -1,3 +1,4 @@
+<h1> Friends </h1>
 <% for user in @users %>
   <div class="user">
     <p>
@@ -7,6 +8,24 @@
     </p>
   </div>
 <% end %>
+
+<h1> Groups </h1>
+
+<table>
+  <tr>
+    <th> Name </th>
+
+    <th colspan="2">Actions</th>
+  </tr>
+ 
+  <% @groups.each do |group| %>
+    <tr>
+      <td><%= group.name%>
+      <td><%= link_to "Add Group", add_group_path(params[:order_id],:group_id => group) %></td>
+    </tr>
+  <% end %>
+</table>
+
 
 
 <%= link_to 'Cancel', order_order_users_path %>

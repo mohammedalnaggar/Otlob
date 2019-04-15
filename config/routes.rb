@@ -26,5 +26,7 @@ Rails.application.routes.draw do
   
   get '/order/:id' => 'orders#finish', :as => :finish_order
   get '/order/:user/:id' => 'order_users#join', :as => :join_order
+  get '/orders/:order_id/order_users/add/:group_id' => 'order_users#addGroup', :as => :add_group
+
   root 'welcome#index'
 end
