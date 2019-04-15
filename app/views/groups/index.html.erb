@@ -14,11 +14,12 @@
     <th colspan="2">Actions</th>
   </tr>
  
-  <% current_user.try(:groups).each do |group| %>
+  <% @groups.each do |group| %>
     <tr>
       <td><%= group.name%>
-      <td><%= link_to 'Show', user_group_path(current_user.try(:id),group) %></td>
-      <td><%= link_to 'Destroy', user_group_path(current_user.try(:id),group),
+      <td><%= link_to 'Show', group_path(group) %></td>
+      <td><%= link_to 'Members ', group_group_members_path(group) %> </td>
+      <td><%= link_to 'Destroy', group_path(group),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
     </tr>

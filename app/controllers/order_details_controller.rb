@@ -4,7 +4,6 @@ class OrderDetailsController < ApplicationController
   def index
     @order_users = OrderUser.select('id').where('order_id = (?) ',params[:order_id])
     @order_details = OrderDetail.where('order_user_id IN (?) ',@order_users)
-    print("**************",@order_details)
   end
 
   def show

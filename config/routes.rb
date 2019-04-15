@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
   
-  #resources :order_details
+
   resources :orders do
     resources :order_users do
       resources :order_details
     end
   end
 
-  resources :groups
-  devise_for :users
-  resources :users do
-    resources :groups
+  resources :groups do 
+    resources :group_members
   end
+
+  devise_for :users
+
+  resources :users 
+  
   get 'welcome/index'
 
   resources :articles do
