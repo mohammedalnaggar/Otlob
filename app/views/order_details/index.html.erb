@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+    <th>Order</th>
       <th>Orderuser</th>
       <th>Item</th>
       <th>Amount</th>
@@ -17,20 +18,24 @@
   <tbody>
     <% @order_details.each do |order_detail| %>
       <tr>
-        <td><%= order_detail.order_user.user.email %></td>
+      <td><%= order_detail.order_user.order.restaurant %></td>
+       <td><%= link_to order_detail.order_user.user.email, user_path(order_detail.order_user.user.id) %></td> 
+
         <td><%= order_detail.item %></td>
         <td><%= order_detail.amount %></td>
         <td><%= order_detail.price %></td>
         <td><%= order_detail.comment %></td>
+        <% if order_detail.order_user.user.id == current_user.try(:id) %>
         <td><%= link_to 'Show', order_order_user_order_detail_path(params[:order_id],params[:order_user_id],order_detail.id) %></td>
         <td><%= link_to 'Edit', edit_order_order_user_order_detail_path(params[:order_id],params[:order_user_id],order_detail.id) %></td>
         <td><%= link_to 'Destroy', order_order_user_order_detail_path(params[:order_id],params[:order_user_id],order_detail.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <% end %>
+        </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Order Detail', new_order_order_user_order_detail_path %> | 
+<%= link_to 'Your Order Detail', new_order_order_user_order_detail_path %> | 
 <%= link_to 'Back', root_path %>

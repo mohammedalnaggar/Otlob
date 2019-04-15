@@ -1,21 +1,22 @@
 class OrderDetailsController < ApplicationController
   before_action :set_order_detail, only: [:show, :edit, :update, :destroy]
 
-  # GET /order_details
-  # GET /order_details.json
   def index
-    @order_details = OrderDetail.all
+    @order_users = OrderUser.select('id').where('order_id = (?) ',params[:order_id])
+    @order_details = OrderDetail.where('order_user_id IN (?) ',@order_users)
+    print("**************",@order_details)
   end
 
   def show
   end
 
   def new
-    @order_info = OrderDetail.where('order_user_id = (?) ',[:order_user_id]).count
+    @order_info = OrderDetail.where('order_user_id = (?) ',params[:order_user_id]).count
     if @order_info == 0
        @order_detail = OrderDetail.new
     else
-      redirect_to edit
+      @order_detail = OrderDetail.where('order_user_id = (?) ',params[:order_user_id])
+      redirect_to edit_order_order_user_order_detail_path(params[:order_id],params[:order_user_id],@order_detail.ids)
     end
   end
 
@@ -39,8 +40,7 @@ class OrderDetailsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /order_details/1
-  # PATCH/PUT /order_details/1.json
+
   def update
     respond_to do |format|
       if @order_detail.update(order_detail_params)
