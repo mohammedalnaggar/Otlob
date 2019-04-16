@@ -14,10 +14,6 @@
   <%= current_user.try(:email) %>
 </p>
  
-<%= link_to 'Articles', controller: 'articles'  %>
 <%= link_to 'Groups',groups_path %>
-
-
-
 <%= link_to "Friends", friendship_path(current_user.try(:id)) %>
 <%= link_to "Orders", orders_path %>
