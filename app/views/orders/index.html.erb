@@ -7,8 +7,8 @@
     <tr>
       <th>Restaurant</th>
       <th>Status</th>
-      <th></th>
-      <th colspan="3"></th>
+      <th colspan="3" >Actions</th>
+      
     </tr>
   </thead>
 
@@ -18,8 +18,8 @@
         <td><%= order.restaurant %></td>
         <td><%= order.status %></td>
         <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <% if order.status != "finished" %>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Manage', order_order_users_path(order.id) %></td>
            <td><%= link_to 'Finish',finish_order_path(order.id), data: { confirm: 'Are you sure you want to terminate order?' } %></td>
            <%  end %>
@@ -28,7 +28,6 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <h1>Orders You are part of it </h1>
@@ -52,7 +51,7 @@
         <td><%= order.order.restaurant %></td>
         <td><%= order.order.status %></td>
         <td><%= order.status %></td>
-        <% if order.status != "joined" %>
+        <% if order.status != "joined" && order.order.status != "finished" %>
         <td><%= link_to 'Join',join_order_path(current_user.try(:id),order.order.id) %></td>
         <%  end %>
         <% if order.status == "joined" %>

@@ -11,7 +11,37 @@
   <%= @order.status %>
 </p>
 
+<h1>Order Users</h1>
 
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>User</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order_users.each do |order_user| %>
+      <tr>
+        <td><%= order_user.order.restaurant %></td>
+        <td><%= order_user.user.email %></td>
+        <td><%= order_user.status %></td>
+        <td><%= link_to 'Remove', order_order_user_path(order_user.order.id,order_user.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+<% if @order.status != "finished" %>
+<%= link_to 'New Order User', new_order_order_user_path(@order.id) %> |
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Manage', order_order_users_path(@order.id) %> |
+<%  end %>
 <%= link_to 'Back', orders_path %>

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [ :edit, :update, :destroy]
   #before_action :delete_records ,only: [:index]
 
   def index
@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    
+    @order = Order.find(params[:id])
+    @order_users = @order.order_users
   end
 
   def new
@@ -21,9 +22,9 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build(order_params)
-  
+    @orderUser = @order.order_users.build(:user_id => current_user.try(:id) , :status => 1)
     respond_to do |format|
-      if @order.save
+      if @order.save && @orderUser.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else

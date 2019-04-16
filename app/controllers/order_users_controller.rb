@@ -12,7 +12,18 @@ class OrderUsersController < ApplicationController
 
   def new
     @users = User.where('id IN (?) AND id NOT IN (?)',Friendship.select("friend_id").where(user_id: current_user.try(:id)),OrderUser.select("user_id").where('order_id = (?)',params[:order_id]))
-    @groups = current_user.groups
+    @order_users = Order.find(params[:order_id]).users
+    @groups = current_user.groups.to_a
+    for group in @groups 
+      print("&&&&&&&&&&&&",@groups)
+      if @order_users.to_set.superset? group.users.to_set
+        print('**************',group.name)
+        @groups.delete(group)
+        print('############', @groups)
+      else
+        print("XXXXXXXXXXXXXX")
+      end
+    end
   end
 
   # GET /order_users/1/edit
