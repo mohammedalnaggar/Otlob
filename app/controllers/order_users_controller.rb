@@ -52,15 +52,17 @@ class OrderUsersController < ApplicationController
   end
 
   def addGroup
-    @groupMembers = GroupMember.where('group_id = (?)',params[:group_id])
-    @order = Order.find( params[:order_id])
-    for groupMember in @groupMembers
-     @orderUser = @order.order_users.build(:user_id => params[:user_id])
-     @orderUser.save
+    @groupMembers = Group.find(params[:group_id]).users
+  @order = Order.find( params[:order_id])
+  for groupMember in @groupMembers
+    if @order.users.exclude? groupMember
+      @orderUser = @order.order_users.build(:user_id => groupMember.id)
+      @orderUser.save
     end
+  end
     redirect_to order_order_users_path
   end
-
+  
   def destroy
     @order_user.destroy
     respond_to do |format|
